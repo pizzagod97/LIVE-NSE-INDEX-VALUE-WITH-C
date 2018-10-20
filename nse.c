@@ -1,5 +1,5 @@
 
-
+//THIS PROGRAM IS READING THE NSE INDEX VALUE FROM REDIFF FINANCE
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/socket.h>
