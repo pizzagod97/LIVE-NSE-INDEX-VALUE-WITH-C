@@ -77,25 +77,19 @@ int main(int argc, char** argv)
 	
 	servaddr.sin_port = htons(443);
 	servaddr.sin_family = AF_INET;
-// first connect to the remote as usual, but use the port 443 instead of 80
 
-// initialize OpenSSL - do this once and stash ssl_ctx in a global var
 SSL_load_error_strings ();
 SSL_library_init ();
 SSL_CTX *ssl_ctx = SSL_CTX_new (SSLv23_client_method ());
 
-// create an SSL connection and attach it to the socket
 SSL *conn = SSL_new(ssl_ctx);
 SSL_set_fd(conn, sock_id);
 
 
-// now proceed with HTTP traffic, using SSL_read instead of recv() and
-// SSL_write instead of send(), and SSL_shutdown/SSL_free before close()	
-	
+
 	connect(sock_id, (struct sockaddr *)&servaddr, sizeof(servaddr));
 	
-	// perform the SSL/TLS handshake with the server - when on the
-// server side, this would use SSL_accept()
+	
 int err = SSL_connect(conn);
 if (err != 1)
    abort(); // handle error
